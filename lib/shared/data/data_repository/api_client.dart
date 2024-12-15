@@ -4,7 +4,7 @@ import '../../constants/constants.dart';
 
 class ApiClient {
   Future<dynamic> get(String endpoint) async {
-    final response = await http.get(Uri.parse('$baseUrl$endpoint'));
+    final response = await http.get(Uri.parse('${AppENV.baseUrl}$endpoint'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -15,7 +15,7 @@ class ApiClient {
   Future<dynamic> post(String endpoint, Map<String, dynamic> body,
       {Map<String, String>? headers}) async {
     final response = await http.post(
-      Uri.parse('$baseUrl$endpoint'),
+      Uri.parse('${AppENV.baseUrl}$endpoint'),
       headers: headers ?? {'Content-Type': 'application/json'},
       body: json.encode(body),
     );

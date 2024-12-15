@@ -25,7 +25,7 @@ class HomeScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
-                    "assets/Logo.png",
+                    AppENV.logo,
                     width: w * 0.15,
                   ),
                   const Text(

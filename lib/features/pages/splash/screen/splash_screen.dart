@@ -24,7 +24,7 @@ class SplashScreen extends ConsumerWidget {
           const Spacer(),
           Center(
             child: Image.asset(
-              "assets/Logo.png",
+              AppENV.logo,
             ),
           ),
           const Spacer(),

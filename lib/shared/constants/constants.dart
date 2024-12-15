@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-const String baseUrl = 'https://assign-api.piton.com.tr/api/rest/';
+class AppENV {
+  static const String baseUrl = 'https://assign-api.piton.com.tr/api/rest/';
+  static const String logo = 'assets/Logo.png';
+}
 
 class AppColors {
   /// App primary color

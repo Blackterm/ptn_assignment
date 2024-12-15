@@ -32,7 +32,7 @@ class RegisterScreen extends ConsumerWidget {
               padding: EdgeInsets.only(top: padding.top),
               child: Center(
                 child: Image.asset(
-                  "assets/Logo.png",
+                  AppENV.logo,
                   width: w * 0.3,
                 ),
               ),

@@ -2,10 +2,10 @@ import 'package:ptn_assignment/shared/data/models/login_token.dart';
 
 import '../../shared/data/data_repository/api_service.dart';
 
-class HomeDataRepository {
+class LoginDataRepository {
   final ApiService apiService;
 
-  HomeDataRepository(this.apiService);
+  LoginDataRepository(this.apiService);
 
   Future<LoginToken> postLogin(String email, String password) async {
     var body = {
