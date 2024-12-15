@@ -1,11 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../../constants/constants.dart';
 
 class ApiClient {
-  final String baseUrl;
-
-  ApiClient(this.baseUrl);
-
   Future<dynamic> get(String endpoint) async {
     final response = await http.get(Uri.parse('$baseUrl$endpoint'));
     if (response.statusCode == 200) {

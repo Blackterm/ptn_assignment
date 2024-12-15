@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String baseUrl = 'https://assign-api.piton.com.tr/api/rest/';
+
 class AppColors {
   /// App primary color
   static const Color primary = Color(0xff1DA1F2);
