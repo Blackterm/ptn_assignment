@@ -68,13 +68,10 @@ class LoginRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [RegisterScreen]
-class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
-  RegisterRoute({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
+class RegisterRoute extends PageRouteInfo<void> {
+  const RegisterRoute({List<PageRouteInfo>? children})
+      : super(
           RegisterRoute.name,
-          args: RegisterRouteArgs(key: key),
           initialChildren: children,
         );
 
@@ -83,22 +80,9 @@ class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<RegisterRouteArgs>(
-          orElse: () => const RegisterRouteArgs());
-      return RegisterScreen(key: args.key);
+      return RegisterScreen();
     },
   );
-}
-
-class RegisterRouteArgs {
-  const RegisterRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'RegisterRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

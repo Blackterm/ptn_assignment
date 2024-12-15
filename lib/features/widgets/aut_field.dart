@@ -40,8 +40,8 @@ class AuthField extends StatelessWidget {
               color: Colors.grey,
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4), // Yuvarlatılmış kenarlar
-              borderSide: BorderSide.none, // Varsayılan border yok
+              borderRadius: BorderRadius.circular(4),
+              borderSide: BorderSide.none,
             ),
           ),
         ),

@@ -1,9 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ptn_assignment/features/data/register_data_repository.dart';
 import 'package:ptn_assignment/shared/data/models/login_token.dart';
-
 import '../../../../shared/data/data_repository/api_client.dart';
 import '../../../../shared/data/data_repository/api_service.dart';
-import '../../../data/login_data_repository.dart';
 
 final apiClientProvider = Provider((ref) {
   return ApiClient();
@@ -14,14 +13,17 @@ final apiServiceProvider = Provider((ref) {
   return ApiService(apiClient);
 });
 
-final postLoginProvider = Provider((ref) {
+final postRegisterProvider = Provider((ref) {
   final apiService = ref.watch(apiServiceProvider);
-  return LoginDataRepository(apiService);
+  return RegisterDataRepository(apiService);
 });
 
-final loginProvider = FutureProvider.family<LoginToken, Map<String, String>>(
+final registerProvider = FutureProvider.family<LoginToken, Map<String, String>>(
     (ref, credentials) async {
-  final repository = ref.watch(postLoginProvider);
-  return await repository.postLogin(
-      credentials['email']!, credentials['password']!);
+  final repository = ref.watch(postRegisterProvider);
+  return await repository.postRegister(
+    credentials['email']!,
+    credentials['email']!,
+    credentials['password']!,
+  );
 });

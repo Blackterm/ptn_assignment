@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ptn_assignment/features/pages/register/controller/register_controller.dart';
 
 import '../../../../shared/constants/constants.dart';
 import '../../../../shared/routers/app_route.dart';
@@ -8,17 +9,24 @@ import '../../../widgets/aut_field.dart';
 import '../../../widgets/custom_button.dart';
 
 @RoutePage()
-class RegisterScreen extends ConsumerWidget {
-  RegisterScreen({super.key});
-
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class RegisterScreen extends ConsumerStatefulWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _RegisterScreenState createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     EdgeInsets padding = MediaQuery.of(context).padding;
+
+    final registerController = ref.read(registerControllerProvider);
+
     return Scaffold(
         body: SafeArea(
       child: Padding(
@@ -58,7 +66,7 @@ class RegisterScreen extends ConsumerWidget {
             ),
             AuthField(
               fieldName: 'Name',
-              controller: nameController,
+              controller: _nameController,
               hintText: 'Jhon Doe',
             ),
             const SizedBox(
@@ -66,7 +74,7 @@ class RegisterScreen extends ConsumerWidget {
             ),
             AuthField(
               fieldName: 'E-mail',
-              controller: emailController,
+              controller: _emailController,
               hintText: 'john@mail.com',
             ),
             const SizedBox(
@@ -74,7 +82,7 @@ class RegisterScreen extends ConsumerWidget {
             ),
             AuthField(
               fieldName: 'Password',
-              controller: passwordController,
+              controller: _passwordController,
               hintText: '* * * * * *',
               obscureText: true,
             ),
@@ -104,7 +112,14 @@ class RegisterScreen extends ConsumerWidget {
             const Spacer(),
             CustomButton(
               title: 'Register',
-              onTap: () {},
+              onTap: () {
+                registerController.register(
+                  context,
+                  _nameController.text,
+                  _emailController.text,
+                  _passwordController.text,
+                );
+              },
             ),
           ],
         ),
