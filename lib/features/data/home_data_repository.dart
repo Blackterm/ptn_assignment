@@ -1,5 +1,6 @@
 import 'package:ptn_assignment/shared/data/models/books.dart';
 import 'package:ptn_assignment/shared/data/models/categories.dart';
+import 'package:ptn_assignment/shared/data/models/cover_image.dart';
 import '../../shared/data/data_repository/api_service.dart';
 
 class HomeDataRepository {
@@ -16,9 +17,24 @@ class HomeDataRepository {
   }
 
   Future<Books> getProduct(String id) async {
+    final headers = {
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NTcsImVtYWlsIjoibXVyYXRAaG90bWFpbC5jb20iLCJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLXVzZXItaWQiOiI0NTciLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJwdWJsaWMiLCJ4LWhhc3VyYS1hbGxvd2VkLXJvbGVzIjpbInB1YmxpYyIsInVzZXIiXX0sImlhdCI6MTczNDM3NTU3NCwiZXhwIjoxNzYwMjk1NTc0fQ.uPn0UAifstaadH06h16NrkSIAxpkK3-KfYsYNvSCa4o',
+    };
     final data = await apiService.getData(
       'products/$id',
+      headers: headers,
     );
+
     return Books.fromJson(data);
+  }
+
+  Future<CoverImage> postCoverImage(String fileName) async {
+    final body = {
+      'fileName': fileName,
+    };
+    final data = await apiService.postData('cover_image', body);
+
+    return CoverImage.fromJson(data);
   }
 }

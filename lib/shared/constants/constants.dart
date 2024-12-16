@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class AppENV {
   static const String baseUrl = 'https://assign-api.piton.com.tr/api/rest/';
   static const String logo = 'assets/Logo.png';
-  static const String exImage =
-      'https://s3.piton.com.tr/assignment/dune.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=P%21T10.MINIO%2F20241215%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241215T195638Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&X-Amz-Signature=22c7c092c5a07d86c10a422ddf6e4a5c87ae9a59131780f9a712152aae77ca53';
+  static const String placeHolder = 'assets/placeholder.png';
 }
 
 class AppColors {

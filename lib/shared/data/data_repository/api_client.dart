@@ -3,8 +3,14 @@ import 'package:http/http.dart' as http;
 import '../../constants/constants.dart';
 
 class ApiClient {
-  Future<dynamic> get(String endpoint) async {
-    final response = await http.get(Uri.parse('${AppENV.baseUrl}$endpoint'));
+  Future<dynamic> get(String endpoint, {Map<String, String>? headers}) async {
+    final uri = Uri.parse('${AppENV.baseUrl}$endpoint');
+
+    final response = await http.get(
+      uri,
+      headers: headers,
+    );
+
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {

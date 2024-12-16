@@ -1,9 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ptn_assignment/features/data/home_data_repository.dart';
-import 'package:ptn_assignment/features/data/register_data_repository.dart';
 import 'package:ptn_assignment/shared/data/models/books.dart';
 import 'package:ptn_assignment/shared/data/models/categories.dart';
-import 'package:ptn_assignment/shared/data/models/login_token.dart';
+import 'package:ptn_assignment/shared/data/models/cover_image.dart';
 import '../../../../shared/data/data_repository/api_client.dart';
 import '../../../../shared/data/data_repository/api_service.dart';
 
@@ -26,10 +25,19 @@ final categoryProvider = FutureProvider<Categories>((ref) async {
   return await repository.getCategory();
 });
 
-final bookProvider =
-    FutureProvider.family<Books, Map<String, String>>((ref, credentials) async {
+final bookProvider = FutureProvider.family<Books, String>((ref, id) async {
   final repository = ref.watch(homeProvider);
-  return await repository.getProduct(
-    credentials['id']!,
-  );
+  final response = await repository.getProduct(id);
+
+  return response;
 });
+
+final imageProvider =
+    FutureProvider.family<CoverImage, String>((ref, fileName) async {
+  final repository = ref.watch(homeProvider);
+  final response = await repository.postCoverImage('$fileName.png');
+  return response;
+});
+
+final selectedCategoryIdProvider = StateProvider<int>((ref) => 0);
+final searchQueryProvider = StateProvider<String>((ref) => '');

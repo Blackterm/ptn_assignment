@@ -28,7 +28,7 @@ class Product {
   String? description;
   int? id;
   String? name;
-  double? price;
+  num? price;
   int? sales;
   String? slug;
   LikesAggregate? likesAggregate;
