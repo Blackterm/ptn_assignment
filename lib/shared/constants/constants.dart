@@ -4,6 +4,8 @@ class AppENV {
   static const String baseUrl = 'https://assign-api.piton.com.tr/api/rest/';
   static const String logo = 'assets/Logo.png';
   static const String placeHolder = 'assets/placeholder.png';
+  static const String like = 'assets/like.png';
+  static const String unlike = 'assets/unlike.png';
 }
 
 class AppColors {

@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ptn_assignment/features/pages/category/screen/category_screen.dart';
 import 'package:ptn_assignment/shared/data/models/books.dart';
 import 'package:ptn_assignment/shared/routers/app_route.dart';
 import '../../../../shared/constants/constants.dart';

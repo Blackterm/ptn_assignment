@@ -1,6 +1,7 @@
 import 'package:ptn_assignment/shared/data/models/books.dart';
 import 'package:ptn_assignment/shared/data/models/categories.dart';
 import 'package:ptn_assignment/shared/data/models/cover_image.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../shared/data/data_repository/api_service.dart';
 
 class HomeDataRepository {
@@ -17,9 +18,10 @@ class HomeDataRepository {
   }
 
   Future<Books> getProduct(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    String? _token = prefs.getString('user_token');
     final headers = {
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NTcsImVtYWlsIjoibXVyYXRAaG90bWFpbC5jb20iLCJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLXVzZXItaWQiOiI0NTciLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJwdWJsaWMiLCJ4LWhhc3VyYS1hbGxvd2VkLXJvbGVzIjpbInB1YmxpYyIsInVzZXIiXX0sImlhdCI6MTczNDQzMDcyNCwiZXhwIjoxNzYwMzUwNzI0fQ.r23fRJ3P6TN8MqucxA8ZlcWJZ2wrFsO13xUlDHUhkT8',
+      'Authorization': 'Bearer $_token',
     };
     final data = await apiService.getData(
       'products/$id',

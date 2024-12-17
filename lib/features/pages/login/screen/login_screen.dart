@@ -6,6 +6,7 @@ import '../../../../shared/routers/app_route.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/aut_field.dart';
 import '../controller/login_controller.dart';
+import '../provider/login_provider.dart';
 
 @RoutePage()
 class LoginScreen extends ConsumerStatefulWidget {
@@ -24,16 +25,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     EdgeInsets padding = MediaQuery.of(context).padding;
 
     final loginController = ref.read(loginControllerProvider);
+    final rememberMe = ref.watch(rememberMeProvider);
 
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Logo ve başlıklar
               Padding(
                 padding: EdgeInsets.only(top: padding.top),
                 child: Center(
@@ -43,57 +44,53 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: h * 0.09,
-              ),
+              SizedBox(height: h * 0.09),
               Text(
                 'Welcome back!',
                 style: AppTextStyles.h4.copyWith(
                   color: Colors.grey[700],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Login to your account',
-                style: AppTextStyles.h3,
-              ),
-              SizedBox(
-                height: h * 0.09,
-              ),
+              const SizedBox(height: 10),
+              const Text('Login to your account', style: AppTextStyles.h3),
+              SizedBox(height: h * 0.09),
               AuthField(
                 fieldName: 'E-mail',
                 controller: _emailController,
                 hintText: 'john@mail.com',
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               AuthField(
                 fieldName: 'Password',
                 controller: _passwordController,
                 hintText: '* * * * * *',
                 obscureText: true,
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Remember Me',
-                    style: AppTextStyles.body.copyWith(
-                      color: AppColors.backgroundPrimaryDark,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: rememberMe,
+                        onChanged: (value) {
+                          ref.read(rememberMeProvider.notifier).state =
+                              value ?? false;
+                        },
+                      ),
+                      Text(
+                        'Remember Me',
+                        style: AppTextStyles.body.copyWith(
+                          color: AppColors.backgroundPrimaryDark,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                   InkWell(
                     onTap: () {
-                      context.router.push(
-                        RegisterRoute(),
-                      );
+                      context.router.push(RegisterRoute());
                     },
                     child: Text(
                       'Register',

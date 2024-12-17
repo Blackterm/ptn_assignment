@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../shared/routers/app_route.dart';
 import '../provider/login_provider.dart';
 
@@ -51,10 +52,12 @@ class LoginController {
       final loginToken = await ref.read(
         loginProvider({'email': email, 'password': password}).future,
       );
+      if (ref.watch(rememberMeProvider)) {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('user_token', loginToken.actionLogin!.token!);
+      }
 
-      context.router.push(
-        HomeRoute(),
-      );
+      context.router.push(HomeRoute());
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Giriş başarısız: $e')),

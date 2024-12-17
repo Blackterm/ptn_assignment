@@ -25,3 +25,5 @@ final loginProvider = FutureProvider.family<LoginToken, Map<String, String>>(
   return await repository.postLogin(
       credentials['email']!, credentials['password']!);
 });
+
+final rememberMeProvider = StateProvider<bool>((ref) => false);

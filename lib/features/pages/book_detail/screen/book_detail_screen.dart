@@ -31,34 +31,51 @@ class BookDetailScreen extends ConsumerWidget {
             children: [
               CustomAppbar(title: 'Book Details'),
               const SizedBox(height: 25),
-              bookImageAsync.when(
-                data: (image) {
-                  return Image.network(
-                    height: h * 0.3,
-                    image.actionProductImage!.url!,
-                    errorBuilder: (BuildContext context, Object error,
-                        StackTrace? stackTrace) {
-                      return Padding(
-                        padding: EdgeInsets.only(right: 10),
-                        child: Image.asset(
-                          height: h * 0.3,
-                          width: w * 0.3,
-                          AppENV.placeHolder,
-                        ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    AppENV.unlike,
+                    color: Colors.white,
+                  ),
+                  bookImageAsync.when(
+                    data: (image) {
+                      return Image.network(
+                        height: h * 0.3,
+                        image.actionProductImage!.url!,
+                        errorBuilder: (BuildContext context, Object error,
+                            StackTrace? stackTrace) {
+                          return Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Image.asset(
+                              height: h * 0.3,
+                              width: w * 0.3,
+                              AppENV.placeHolder,
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, stack) {
-                  return Center(
-                    child: Text('Bir hata oluştu: $err'),
-                  );
-                },
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (err, stack) {
+                      return Center(
+                        child: Text('Bir hata oluştu: $err'),
+                      );
+                    },
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Image.asset(
+                      AppENV.unlike,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               Text(
-                book!.name! ?? '',
+                book!.name!,
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -71,6 +88,7 @@ class BookDetailScreen extends ConsumerWidget {
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 20),
