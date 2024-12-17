@@ -31,6 +31,9 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       title: 'Piton Assignment',
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+      ),
       routeInformationParser: appRouter.defaultRouteParser(),
       routerDelegate: appRouter.delegate(),
       debugShowCheckedModeBanner: false,

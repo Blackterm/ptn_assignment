@@ -19,7 +19,7 @@ class HomeDataRepository {
   Future<Books> getProduct(String id) async {
     final headers = {
       'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NTcsImVtYWlsIjoibXVyYXRAaG90bWFpbC5jb20iLCJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLXVzZXItaWQiOiI0NTciLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJwdWJsaWMiLCJ4LWhhc3VyYS1hbGxvd2VkLXJvbGVzIjpbInB1YmxpYyIsInVzZXIiXX0sImlhdCI6MTczNDM3NTU3NCwiZXhwIjoxNzYwMjk1NTc0fQ.uPn0UAifstaadH06h16NrkSIAxpkK3-KfYsYNvSCa4o',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NTcsImVtYWlsIjoibXVyYXRAaG90bWFpbC5jb20iLCJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLXVzZXItaWQiOiI0NTciLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJwdWJsaWMiLCJ4LWhhc3VyYS1hbGxvd2VkLXJvbGVzIjpbInB1YmxpYyIsInVzZXIiXX0sImlhdCI6MTczNDQzMDcyNCwiZXhwIjoxNzYwMzUwNzI0fQ.r23fRJ3P6TN8MqucxA8ZlcWJZ2wrFsO13xUlDHUhkT8',
     };
     final data = await apiService.getData(
       'products/$id',

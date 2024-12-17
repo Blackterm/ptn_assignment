@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
 import '../../features/pages/book_detail/screen/book_detail_screen.dart';
 import '../../features/pages/category/screen/category_screen.dart';
 import '../../features/pages/home/screen/home_screen.dart';
 import '../../features/pages/login/screen/login_screen.dart';
 import '../../features/pages/register/screen/register_screen.dart';
 import '../../features/pages/splash/screen/splash_screen.dart';
+import '../data/models/books.dart';
+import '../data/models/categories.dart';
 part 'app_route.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')

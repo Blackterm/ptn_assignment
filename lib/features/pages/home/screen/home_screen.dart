@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ptn_assignment/features/pages/category/screen/category_screen.dart';
 import 'package:ptn_assignment/shared/data/models/books.dart';
+import 'package:ptn_assignment/shared/routers/app_route.dart';
 import '../../../../shared/constants/constants.dart';
 import '../../../../shared/data/models/categories.dart';
 import '../provider/home_provider.dart';
@@ -175,7 +177,11 @@ class CategoryBookSection extends ConsumerWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.router.push(
+                      CategoryRoute(category: category),
+                    );
+                  },
                   child: Text(
                     'View All',
                     style: AppTextStyles.bodySm.copyWith(
@@ -205,12 +211,18 @@ class CategoryBookSection extends ConsumerWidget {
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.zero,
                   itemCount: filteredBooks.length,
                   itemBuilder: (context, index) {
                     final book = filteredBooks[index];
 
-                    return _BookWidget(
-                      product: book,
+                    return InkWell(
+                      child: _BookWidget(
+                        product: book,
+                      ),
+                      onTap: () {
+                        context.router.push(BookDetailRoute(book: book));
+                      },
                     );
                   },
                 ),
@@ -243,7 +255,7 @@ class _BookWidget extends ConsumerWidget {
       height: h * 0.18,
       width: w * 0.65,
       margin: const EdgeInsets.only(
-        left: 15,
+        right: 15,
       ),
       decoration: BoxDecoration(
         color: AppColors.backgroundPrimaryLight,
@@ -283,11 +295,12 @@ class _BookWidget extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  width: w * 0.3,
+                  width: w * 0.32,
                   child: Text(
                     product.name!,
                     style: AppTextStyles.bodyLg.copyWith(
                       color: AppColors.black,
+                      fontSize: 17,
                     ),
                     overflow: TextOverflow.ellipsis,
                     softWrap: true,
@@ -295,11 +308,12 @@ class _BookWidget extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  width: w * 0.3,
+                  width: w * 0.32,
                   child: Text(
                     product.author!,
                     style: AppTextStyles.body.copyWith(
                       color: AppColors.black,
+                      fontSize: 12,
                     ),
                     overflow: TextOverflow.ellipsis,
                     softWrap: true,
@@ -308,7 +322,7 @@ class _BookWidget extends ConsumerWidget {
                 ),
                 Spacer(),
                 Text(
-                  '${product.price!}',
+                  '${product.price!} \$',
                   style: AppTextStyles.bodyLg.copyWith(
                     color: AppColors.backgroundPrimaryDark,
                     fontWeight: FontWeight.w800,

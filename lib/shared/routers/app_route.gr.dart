@@ -11,10 +11,17 @@ part of 'app_route.dart';
 
 /// generated route for
 /// [BookDetailScreen]
-class BookDetailRoute extends PageRouteInfo<void> {
-  const BookDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class BookDetailRoute extends PageRouteInfo<BookDetailRouteArgs> {
+  BookDetailRoute({
+    Key? key,
+    required Product? book,
+    List<PageRouteInfo>? children,
+  }) : super(
           BookDetailRoute.name,
+          args: BookDetailRouteArgs(
+            key: key,
+            book: book,
+          ),
           initialChildren: children,
         );
 
@@ -23,17 +30,44 @@ class BookDetailRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const BookDetailScreen();
+      final args = data.argsAs<BookDetailRouteArgs>();
+      return BookDetailScreen(
+        key: args.key,
+        book: args.book,
+      );
     },
   );
 }
 
+class BookDetailRouteArgs {
+  const BookDetailRouteArgs({
+    this.key,
+    required this.book,
+  });
+
+  final Key? key;
+
+  final Product? book;
+
+  @override
+  String toString() {
+    return 'BookDetailRouteArgs{key: $key, book: $book}';
+  }
+}
+
 /// generated route for
 /// [CategoryScreen]
-class CategoryRoute extends PageRouteInfo<void> {
-  const CategoryRoute({List<PageRouteInfo>? children})
-      : super(
+class CategoryRoute extends PageRouteInfo<CategoryRouteArgs> {
+  CategoryRoute({
+    Key? key,
+    required Category category,
+    List<PageRouteInfo>? children,
+  }) : super(
           CategoryRoute.name,
+          args: CategoryRouteArgs(
+            key: key,
+            category: category,
+          ),
           initialChildren: children,
         );
 
@@ -42,9 +76,29 @@ class CategoryRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return CategoryScreen();
+      final args = data.argsAs<CategoryRouteArgs>();
+      return CategoryScreen(
+        key: args.key,
+        category: args.category,
+      );
     },
   );
+}
+
+class CategoryRouteArgs {
+  const CategoryRouteArgs({
+    this.key,
+    required this.category,
+  });
+
+  final Key? key;
+
+  final Category category;
+
+  @override
+  String toString() {
+    return 'CategoryRouteArgs{key: $key, category: $category}';
+  }
 }
 
 /// generated route for
