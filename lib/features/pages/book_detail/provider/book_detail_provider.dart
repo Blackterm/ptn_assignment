@@ -42,3 +42,7 @@ final unLikeImageProvider =
 
   return response;
 });
+
+final forceRefreshProvider = StateProvider<bool>((ref) {
+  return false;
+});

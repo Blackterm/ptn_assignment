@@ -7,6 +7,7 @@ import '../../../widgets/custom_button.dart';
 import '../../../widgets/aut_field.dart';
 import '../controller/login_controller.dart';
 import '../provider/login_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 @RoutePage()
 class LoginScreen extends ConsumerStatefulWidget {
@@ -45,22 +46,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               ),
               SizedBox(height: h * 0.09),
               Text(
-                'Welcome back!',
+                'welcome_back'.tr(),
                 style: AppTextStyles.h4.copyWith(
                   color: Colors.grey[700],
                 ),
               ),
               const SizedBox(height: 10),
-              const Text('Login to your account', style: AppTextStyles.h3),
+              Text('login_account'.tr(), style: AppTextStyles.h3),
               SizedBox(height: h * 0.09),
               AuthField(
-                fieldName: 'E-mail',
+                fieldName: 'e-mail'.tr(),
                 controller: _emailController,
                 hintText: 'john@mail.com',
               ),
               const SizedBox(height: 10),
               AuthField(
-                fieldName: 'Password',
+                fieldName: 'password'.tr(),
                 controller: _passwordController,
                 hintText: '* * * * * *',
                 obscureText: true,
@@ -79,7 +80,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                       ),
                       Text(
-                        'Remember Me',
+                        'remember_me'.tr(),
                         style: AppTextStyles.body.copyWith(
                           color: AppColors.backgroundPrimaryDark,
                           fontWeight: FontWeight.bold,
@@ -92,7 +93,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       context.router.push(RegisterRoute());
                     },
                     child: Text(
-                      'Register',
+                      'register'.tr(),
                       style: AppTextStyles.body.copyWith(
                         color: AppColors.backgroundPrimaryDark,
                         fontWeight: FontWeight.bold,
@@ -103,7 +104,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               ),
               const Spacer(),
               CustomButton(
-                title: 'Login',
+                title: 'login'.tr(),
                 onTap: () {
                   loginController.login(
                     context,

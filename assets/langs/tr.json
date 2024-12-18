@@ -1,0 +1,23 @@
+{
+  "login": "Giriş Yap",
+  "skip": "Atla",
+  "book_details" : "Kitap Detayları",
+  "summary": "Özet",
+  "buy_now": "Şimdi Satın Al",
+  "search": "Ara",
+  "book_not_found": "Kitap Bulunamadı.",
+  "catalog": "Katalog",
+  "all": "Tümü",
+  "view_all": "Hepsini Gör",
+  "there_are_no_books": "Bu kategoride kitap bulunmamaktadır.",
+  "welcome_back":"Tekrar hoş geldiniz!",
+  "login_account": "Hesabınıza giriş yapın",
+  "e-mail":"E-posta",
+  "password":"Şifre",
+  "remember_me":"Beni Hatırla",
+  "register":"Kayıt Ol",
+  "welcome":"Hoşgeldiniz",
+  "register_account": "Hesap oluşturun",
+  "name":"Ad",
+  "error_message": "Bir hata oluştu: {error}"
+}

@@ -7,6 +7,7 @@ import '../../../../shared/data/models/categories.dart';
 import '../../../../shared/routers/app_route.dart';
 import '../../../widgets/custom_appbar.dart';
 import '../provider/category_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 @RoutePage()
 class CategoryScreen extends ConsumerStatefulWidget {
@@ -39,7 +40,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                   ref.read(searchProvider.notifier).state = query;
                 },
                 decoration: InputDecoration(
-                  hintText: 'Search',
+                  hintText: 'search'.tr(),
                   prefixIcon: const Icon(
                     Icons.search,
                     color: Colors.grey,
@@ -67,7 +68,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                       .toList();
 
                   if (filteredBooks.isEmpty) {
-                    return const Center(child: Text('Kitap Bulunamadı.'));
+                    return Center(child: Text('book_not_found'.tr()));
                   }
 
                   return GridView.builder(
@@ -98,7 +99,8 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                 loading: () => const Center(child: CircularProgressIndicator()),
                 error: (err, stack) {
                   return Center(
-                    child: Text('Bir hata oluştu: $err'),
+                    child: Text('error_message'
+                        .tr(namedArgs: {'error': err.toString()})),
                   );
                 },
               ),

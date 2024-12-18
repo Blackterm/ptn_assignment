@@ -1,0 +1,23 @@
+{
+  "login": "Login",
+  "skip": "Skip",
+  "book_details" : "Book Details",
+  "summary": "Summary",
+  "buy_now": "Buy Now",
+  "search": "Search",
+  "book_not_found": "Book Not Found.",
+  "catalog": "Catalog",
+  "all": "All",
+  "view_all": "View All",
+  "there_are_no_books": "There are no books in this category.",
+  "welcome_back":"Welcome back!",
+  "login_account": "Login to your account",
+  "e-mail":"E-mail",
+  "password":"Password",
+  "remember_me":"Remember Me",
+  "register":"Register",
+  "welcome":"Welcome",
+  "register_account": "Register an account",
+  "name":"Name",
+  "error_message": "An error occurred: {error}"
+}

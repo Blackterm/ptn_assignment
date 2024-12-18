@@ -6,6 +6,7 @@ import 'package:ptn_assignment/shared/routers/app_route.dart';
 import '../../../../shared/constants/constants.dart';
 import '../../../../shared/data/models/categories.dart';
 import '../provider/home_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 @RoutePage()
 class HomeScreen extends ConsumerWidget {
@@ -30,8 +31,8 @@ class HomeScreen extends ConsumerWidget {
                     AppENV.logo,
                     width: screenWidth * 0.15,
                   ),
-                  const Text(
-                    'Catalog',
+                  Text(
+                    'catalog'.tr(),
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -45,7 +46,10 @@ class HomeScreen extends ConsumerWidget {
                 child: categoriesAsync.when(
                   data: (categories) {
                     final modifiedCategories = [
-                      Category(id: 0, name: "All"),
+                      Category(
+                        id: 0,
+                        name: 'all'.tr(),
+                      ),
                       ...categories.category!,
                     ];
                     return ListView.builder(
@@ -89,7 +93,10 @@ class HomeScreen extends ConsumerWidget {
                   },
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
-                  error: (err, stack) => Center(child: Text('Hata: $err')),
+                  error: (err, stack) => Center(
+                    child: Text('error_message'
+                        .tr(namedArgs: {'error': err.toString()})),
+                  ),
                 ),
               ),
             ),
@@ -100,7 +107,7 @@ class HomeScreen extends ConsumerWidget {
                   ref.read(searchQueryProvider.notifier).state = query;
                 },
                 decoration: InputDecoration(
-                    hintText: 'Search',
+                    hintText: 'search'.tr(),
                     prefixIcon: const Icon(
                       Icons.search,
                       color: Colors.grey,
@@ -136,7 +143,10 @@ class HomeScreen extends ConsumerWidget {
                   }
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, stack) => Center(child: Text('Hata: $err')),
+                error: (err, stack) => Center(
+                  child: Text(
+                      'error_message'.tr(namedArgs: {'error': err.toString()})),
+                ),
               ),
             ),
           ],
@@ -182,7 +192,7 @@ class CategoryBookSection extends ConsumerWidget {
                     );
                   },
                   child: Text(
-                    'View All',
+                    'view_all'.tr(),
                     style: AppTextStyles.bodySm.copyWith(
                       color: AppColors.buttonPrimary,
                       fontWeight: FontWeight.w800,
@@ -202,7 +212,7 @@ class CategoryBookSection extends ConsumerWidget {
                   .toList();
 
               if (filteredBooks.isEmpty) {
-                return const Text('Bu kategoride kitap bulunmuyor.');
+                return Text('there_are_no_books'.tr());
               }
 
               return SizedBox(
@@ -232,7 +242,8 @@ class CategoryBookSection extends ConsumerWidget {
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, stack) {
               return Center(
-                child: Text('Bir hata oluştu: $err'),
+                child: Text(
+                    'error_message'.tr(namedArgs: {'error': err.toString()})),
               );
             },
           ),
@@ -285,7 +296,8 @@ class _BookWidget extends ConsumerWidget {
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, stack) {
               return Center(
-                child: Text('Bir hata oluştu: $err'),
+                child: Text(
+                    'error_message'.tr(namedArgs: {'error': err.toString()})),
               );
             },
           ),

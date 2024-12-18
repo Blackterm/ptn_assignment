@@ -2,10 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ptn_assignment/features/widgets/custom_appbar.dart';
+import 'package:ptn_assignment/main.dart';
 import 'package:ptn_assignment/shared/data/models/books.dart';
 import '../../../../shared/constants/constants.dart';
 import '../../home/provider/home_provider.dart';
 import '../provider/book_detail_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 @RoutePage()
 class BookDetailScreen extends ConsumerWidget {
@@ -32,7 +34,7 @@ class BookDetailScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomAppbar(
-                title: 'Book Details',
+                title: 'book_details'.tr(),
               ),
               const SizedBox(height: 25),
               Row(
@@ -65,7 +67,8 @@ class BookDetailScreen extends ConsumerWidget {
                         const Center(child: CircularProgressIndicator()),
                     error: (err, stack) {
                       return Center(
-                        child: Text('Bir hata oluştu: $err'),
+                        child: Text('error_message'
+                            .tr(namedArgs: {'error': err.toString()})),
                       );
                     },
                   ),
@@ -97,10 +100,10 @@ class BookDetailScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Summary',
+                  'summary'.tr(),
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.w600,
@@ -141,8 +144,8 @@ class BookDetailScreen extends ConsumerWidget {
                         ),
                       ),
                       const Spacer(),
-                      const Text(
-                        'Buy Now',
+                      Text(
+                        'buy_now'.tr(),
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
@@ -199,6 +202,7 @@ class _LikeWidgetState extends ConsumerState<LikeWidget> {
         isLiked = !isLiked;
       });
 
+      ref.read(forceRefreshProvider.notifier).state = true;
       ref.invalidate(bookHomeProvider(widget.categoryId));
     } catch (error) {
       print('Hata: $error');

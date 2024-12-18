@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ptn_assignment/features/pages/register/controller/register_controller.dart';
-
 import '../../../../shared/constants/constants.dart';
 import '../../../../shared/routers/app_route.dart';
 import '../../../widgets/aut_field.dart';
 import '../../../widgets/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 @RoutePage()
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -49,7 +49,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               height: h * 0.09,
             ),
             Text(
-              'Welcome',
+              'welcome'.tr(),
               style: AppTextStyles.h4.copyWith(
                 color: Colors.grey[700],
               ),
@@ -57,15 +57,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             const SizedBox(
               height: 10,
             ),
-            const Text(
-              'Register an account',
+            Text(
+              'register_account'.tr(),
               style: AppTextStyles.h3,
             ),
             SizedBox(
               height: h * 0.09,
             ),
             AuthField(
-              fieldName: 'Name',
+              fieldName: 'name'.tr(),
               controller: _nameController,
               hintText: 'Jhon Doe',
             ),
@@ -73,7 +73,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               height: 10,
             ),
             AuthField(
-              fieldName: 'E-mail',
+              fieldName: 'e-mail'.tr(),
               controller: _emailController,
               hintText: 'john@mail.com',
             ),
@@ -81,7 +81,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               height: 10,
             ),
             AuthField(
-              fieldName: 'Password',
+              fieldName: 'password'.tr(),
               controller: _passwordController,
               hintText: '* * * * * *',
               obscureText: true,
@@ -100,7 +100,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     );
                   },
                   child: Text(
-                    'Login',
+                    'login'.tr(),
                     style: AppTextStyles.body.copyWith(
                       color: AppColors.backgroundPrimaryDark,
                       fontWeight: FontWeight.bold,
@@ -111,7 +111,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             ),
             const Spacer(),
             CustomButton(
-              title: 'Register',
+              title: 'register'.tr(),
               onTap: () {
                 registerController.register(
                   context,

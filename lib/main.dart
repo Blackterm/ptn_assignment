@@ -1,12 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'shared/helpers/observers.dart';
 import 'shared/routers/app_route.dart';
 
-void main() => mainCommon();
-
-mainCommon() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light.copyWith(
@@ -14,11 +16,17 @@ mainCommon() {
       statusBarBrightness: Brightness.light,
     ),
   );
+
   runApp(ProviderScope(
     observers: [
       Observers(),
     ],
-    child: MyApp(),
+    child: EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('tr')],
+      path: 'assets/langs',
+      fallbackLocale: const Locale('en'),
+      child: MyApp(),
+    ),
   ));
 }
 
@@ -34,6 +42,9 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
       routeInformationParser: appRouter.defaultRouteParser(),
       routerDelegate: appRouter.delegate(),
       debugShowCheckedModeBanner: false,

@@ -5,6 +5,7 @@ import '../../../../shared/constants/constants.dart';
 import '../../../../shared/routers/app_route.dart';
 import '../../../widgets/custom_button.dart';
 import '../controller/splash_controller.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 @RoutePage()
 class SplashScreen extends ConsumerStatefulWidget {
@@ -20,7 +21,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    splashController = SplashController(context);
+    splashController = SplashController(context, ref);
     splashController.startSplashTimer();
   }
 
@@ -47,7 +48,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             child: Column(
               children: [
                 CustomButton(
-                  title: 'Login',
+                  title: 'login'.tr(),
                   onTap: () {
                     context.router.pushAndPopUntil(
                       LoginRoute(),
@@ -61,7 +62,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                     width: w,
                     child: Center(
                       child: Text(
-                        'Skip',
+                        'skip'.tr(),
                         style: AppTextStyles.bodyLg.copyWith(
                           color: AppColors.backgroundPrimaryDark,
                         ),

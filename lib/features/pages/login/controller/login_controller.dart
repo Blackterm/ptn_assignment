@@ -55,6 +55,8 @@ class LoginController {
       if (ref.watch(rememberMeProvider)) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('user_token', loginToken.actionLogin!.token!);
+        await prefs.setString('userEmail', email);
+        await prefs.setString('userPassword', password);
       }
 
       context.router.push(HomeRoute());
