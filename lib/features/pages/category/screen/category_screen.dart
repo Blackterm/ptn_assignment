@@ -87,7 +87,9 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                           product: book,
                         ),
                         onTap: () {
-                          context.router.push(BookDetailRoute(book: book));
+                          context.router.push(BookDetailRoute(
+                              book: book,
+                              categoryId: widget.category.id!.toString()));
                         },
                       );
                     },

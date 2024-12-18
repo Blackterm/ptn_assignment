@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ptn_assignment/features/widgets/custom_appbar.dart';
 import 'package:ptn_assignment/shared/data/models/books.dart';
-
 import '../../../../shared/constants/constants.dart';
-import '../provider/book_detail_screen.dart';
+import '../../home/provider/home_provider.dart';
+import '../provider/book_detail_provider.dart';
 
 @RoutePage()
 class BookDetailScreen extends ConsumerWidget {
   final Product? book;
+  final String categoryId;
 
   const BookDetailScreen({
     Key? key,
+    required this.categoryId,
     required this.book,
   }) : super(key: key);
 
@@ -29,7 +31,9 @@ class BookDetailScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomAppbar(title: 'Book Details'),
+              CustomAppbar(
+                title: 'Book Details',
+              ),
               const SizedBox(height: 25),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,11 +69,12 @@ class BookDetailScreen extends ConsumerWidget {
                       );
                     },
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Image.asset(
-                      AppENV.unlike,
-                    ),
+                  LikeWidget(
+                    categoryId: categoryId,
+                    imageId: book!.id.toString(),
+                    isLiked: book!.likesAggregate!.aggregate!.count != 0
+                        ? true
+                        : false,
                   ),
                 ],
               ),
@@ -151,6 +156,61 @@ class BookDetailScreen extends ConsumerWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class LikeWidget extends ConsumerStatefulWidget {
+  final String imageId;
+  final bool isLiked;
+  final String categoryId;
+
+  const LikeWidget({
+    Key? key,
+    required this.categoryId,
+    required this.imageId,
+    required this.isLiked,
+  }) : super(key: key);
+
+  @override
+  ConsumerState<LikeWidget> createState() => _LikeWidgetState();
+}
+
+class _LikeWidgetState extends ConsumerState<LikeWidget> {
+  late bool isLiked;
+
+  @override
+  void initState() {
+    super.initState();
+
+    isLiked = widget.isLiked;
+  }
+
+  Future<void> toggleLike() async {
+    try {
+      if (isLiked) {
+        await ref.read(unLikeImageProvider(widget.imageId).future);
+      } else {
+        await ref.read(likeImageProvider(widget.imageId).future);
+      }
+
+      setState(() {
+        isLiked = !isLiked;
+      });
+
+      ref.invalidate(bookHomeProvider(widget.categoryId));
+    } catch (error) {
+      print('Hata: $error');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: toggleLike,
+      child: Image.asset(
+        isLiked ? AppENV.like : AppENV.unlike,
       ),
     );
   }

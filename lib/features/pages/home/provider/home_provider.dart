@@ -20,19 +20,19 @@ final homeProvider = Provider((ref) {
   return HomeDataRepository(apiService);
 });
 
-final categoryProvider = FutureProvider<Categories>((ref) async {
+final categoryHomeProvider = FutureProvider<Categories>((ref) async {
   final repository = ref.watch(homeProvider);
   return await repository.getCategory();
 });
 
-final bookProvider = FutureProvider.family<Books, String>((ref, id) async {
+final bookHomeProvider = FutureProvider.family<Books, String>((ref, id) async {
   final repository = ref.watch(homeProvider);
   final response = await repository.getProduct(id);
 
   return response;
 });
 
-final imageProvider =
+final imageHomeProvider =
     FutureProvider.family<CoverImage, String>((ref, fileName) async {
   final repository = ref.watch(homeProvider);
   final response = await repository.postCoverImage('$fileName.png');

@@ -17,14 +17,15 @@ void main() {
     });
 
     test('Category Provider returns data', () async {
-      final result = await container.read(categoryProvider.future);
+      final result = await container.read(categoryHomeProvider.future);
 
       expect(result, isA<Categories>());
     });
 
     test('Image Provider returns cover image', () async {
       const testFileName = 'test_image';
-      final result = await container.read(imageProvider(testFileName).future);
+      final result =
+          await container.read(imageHomeProvider(testFileName).future);
 
       expect(result, isA<CoverImage>());
     });

@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:ptn_assignment/features/data/book_detail_repository.dart';
+import 'package:ptn_assignment/features/data/home_data_repository.dart';
 import '../../../../shared/data/data_repository/api_client.dart';
 import '../../../../shared/data/data_repository/api_service.dart';
 import '../../../../shared/data/models/books.dart';
 import '../../../../shared/data/models/cover_image.dart';
-import '../../../data/home_data_repository.dart';
 
 final apiClientProvider = Provider((ref) {
   return ApiClient();
@@ -15,23 +15,30 @@ final apiServiceProvider = Provider((ref) {
   return ApiService(apiClient);
 });
 
-final categoryProvider = Provider((ref) {
+final bookDetailProvider = Provider((ref) {
   final apiService = ref.watch(apiServiceProvider);
-  return HomeDataRepository(apiService);
-});
-
-final bookProvider = FutureProvider.family<Books, String>((ref, id) async {
-  final repository = ref.watch(categoryProvider);
-  final response = await repository.getProduct(id);
-
-  return response;
+  return BookDetailRepository(apiService);
 });
 
 final imageProvider =
     FutureProvider.family<CoverImage, String>((ref, fileName) async {
-  final repository = ref.watch(categoryProvider);
+  final repository = ref.watch(bookDetailProvider);
   final response = await repository.postCoverImage('$fileName.png');
   return response;
 });
 
-final searchProvider = StateProvider<String>((ref) => '');
+final likeImageProvider =
+    FutureProvider.family<CoverImage, String>((ref, id) async {
+  final repository = ref.watch(bookDetailProvider);
+  final response = await repository.likeImage(id);
+
+  return response;
+});
+
+final unLikeImageProvider =
+    FutureProvider.family<CoverImage, String>((ref, id) async {
+  final repository = ref.watch(bookDetailProvider);
+  final response = await repository.unLikeImage(id);
+
+  return response;
+});

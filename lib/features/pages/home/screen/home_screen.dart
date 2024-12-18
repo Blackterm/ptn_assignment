@@ -11,7 +11,7 @@ import '../provider/home_provider.dart';
 class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoriesAsync = ref.watch(categoryProvider);
+    final categoriesAsync = ref.watch(categoryHomeProvider);
     final selectedCategoryId = ref.watch(selectedCategoryIdProvider);
 
     final screenWidth = MediaQuery.of(context).size.width;
@@ -156,7 +156,7 @@ class CategoryBookSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     double h = MediaQuery.of(context).size.height;
     final searchQuery = ref.watch(searchQueryProvider);
-    final booksAsync = ref.watch(bookProvider(category.id.toString()));
+    final booksAsync = ref.watch(bookHomeProvider(category.id.toString()));
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -214,13 +214,15 @@ class CategoryBookSection extends ConsumerWidget {
                   itemCount: filteredBooks.length,
                   itemBuilder: (context, index) {
                     final book = filteredBooks[index];
-
                     return InkWell(
                       child: _BookWidget(
                         product: book,
                       ),
                       onTap: () {
-                        context.router.push(BookDetailRoute(book: book));
+                        context.router.push(BookDetailRoute(
+                          book: book,
+                          categoryId: category.id.toString(),
+                        ));
                       },
                     );
                   },
@@ -247,7 +249,7 @@ class _BookWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bookImageAsync = ref.watch(imageProvider(product.slug!));
+    final bookImageAsync = ref.watch(imageHomeProvider(product.slug!));
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Container(

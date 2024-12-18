@@ -34,7 +34,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Logo ve başlıklar
               Padding(
                 padding: EdgeInsets.only(top: padding.top),
                 child: Center(

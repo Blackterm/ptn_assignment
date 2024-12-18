@@ -14,12 +14,14 @@ part of 'app_route.dart';
 class BookDetailRoute extends PageRouteInfo<BookDetailRouteArgs> {
   BookDetailRoute({
     Key? key,
+    required String categoryId,
     required Product? book,
     List<PageRouteInfo>? children,
   }) : super(
           BookDetailRoute.name,
           args: BookDetailRouteArgs(
             key: key,
+            categoryId: categoryId,
             book: book,
           ),
           initialChildren: children,
@@ -33,6 +35,7 @@ class BookDetailRoute extends PageRouteInfo<BookDetailRouteArgs> {
       final args = data.argsAs<BookDetailRouteArgs>();
       return BookDetailScreen(
         key: args.key,
+        categoryId: args.categoryId,
         book: args.book,
       );
     },
@@ -42,16 +45,19 @@ class BookDetailRoute extends PageRouteInfo<BookDetailRouteArgs> {
 class BookDetailRouteArgs {
   const BookDetailRouteArgs({
     this.key,
+    required this.categoryId,
     required this.book,
   });
 
   final Key? key;
 
+  final String categoryId;
+
   final Product? book;
 
   @override
   String toString() {
-    return 'BookDetailRouteArgs{key: $key, book: $book}';
+    return 'BookDetailRouteArgs{key: $key, categoryId: $categoryId, book: $book}';
   }
 }
 
